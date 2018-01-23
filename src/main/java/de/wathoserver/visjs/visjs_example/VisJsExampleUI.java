@@ -2,16 +2,11 @@ package de.wathoserver.visjs.visjs_example;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.vaadin.visjs.networkDiagram.Edge;
-import org.vaadin.visjs.networkDiagram.NetworkDiagram;
-import org.vaadin.visjs.networkDiagram.Node;
-import org.vaadin.visjs.networkDiagram.options.Options;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 
 /**
@@ -25,31 +20,22 @@ import com.vaadin.ui.UI;
 @Theme("visjs-theme")
 public class VisJsExampleUI extends UI {
 
-  private NetworkDiagram nd;
+  public static final String VIEW_START = "";
+  public static final String VIEW_SIMPLE_EXAMPLE = "simple_example";
+  public static final String VIEW_SIMPLE_FULLSCREEN_EXAMPLE = "simple_fullscreen_example";
+
+  private Navigator navigator;
+
 
   @Override
   protected void init(final VaadinRequest vaadinRequest) {
-
-
-
-    final Options options = new Options();
-    options.setHeight("100%");
-    options.setWidth("100%");
-    nd = new NetworkDiagram(options);
-    nd.setSizeFull();
-    populateGraph();
-
-    final Panel content = new Panel("VisJs-Example", nd);
-    content.setHeight("400px");
-    content.setWidth("400px");
-    setContent(content);
+    getPage().setTitle("VisJs-Example");
+    navigator = new Navigator(this, this);
+    navigator.addView(VIEW_START, new StartView());
+    navigator.addView(VIEW_SIMPLE_EXAMPLE, new SimpleExampleView());
+    navigator.addView(VIEW_SIMPLE_FULLSCREEN_EXAMPLE, new SimpleFullscreenExampleView());
   }
 
-  private void populateGraph() {
-    nd.addNode(new Node("1", "Node 1"), new Node("2", "Node 2"), new Node("3", "Node 3"));
-    nd.addEdge(new Edge("1", "2"), new Edge("1", "3"));
-    nd.addEdge(new Edge("2", "3"));
-  }
 
   @WebServlet(urlPatterns = "/*", name = "VisJsExampleUIServlet", asyncSupported = true)
   @VaadinServletConfiguration(ui = VisJsExampleUI.class, productionMode = false)
