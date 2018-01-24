@@ -23,6 +23,7 @@ public class VisJsExampleUI extends UI {
   public static final String VIEW_START = "";
   public static final String VIEW_SIMPLE_EXAMPLE = "simple_example";
   public static final String VIEW_SIMPLE_FULLSCREEN_EXAMPLE = "simple_fullscreen_example";
+  public static final String VIEW_MOVETO_EXAMPLE = "moveTo_example";
 
   private Navigator navigator;
 
@@ -34,6 +35,7 @@ public class VisJsExampleUI extends UI {
     navigator.addView(VIEW_START, new StartView());
     navigator.addView(VIEW_SIMPLE_EXAMPLE, new SimpleExampleView());
     navigator.addView(VIEW_SIMPLE_FULLSCREEN_EXAMPLE, new SimpleFullscreenExampleView());
+    navigator.addView(VIEW_MOVETO_EXAMPLE, new MoveToExampleView());
   }
 
 

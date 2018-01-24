@@ -16,5 +16,8 @@ public class StartView extends VerticalLayout implements View {
     addComponent(new Button("Simple fullscreen example", event -> {
       getUI().getNavigator().navigateTo(VisJsExampleUI.VIEW_SIMPLE_FULLSCREEN_EXAMPLE);
     }));
+    addComponent(new Button("MoveTo example", event -> {
+      getUI().getNavigator().navigateTo(VisJsExampleUI.VIEW_MOVETO_EXAMPLE);
+    }));
   }
 }
